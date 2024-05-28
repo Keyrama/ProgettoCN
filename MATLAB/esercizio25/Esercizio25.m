@@ -23,11 +23,10 @@ for i = 1:length(n_values)
     f_nodes = runge(x_nodes);
     
     % Costruire le spline naturale e not-a-knot
-    spline_natural = spline(x_nodes, f_nodes);
+    f_spline_natural = spline0(x_nodes, f_nodes,x_eval);
     spline_not_a_knot = csapi(x_nodes, f_nodes);
     
     % Valutare le spline sui punti di valutazione
-    f_spline_natural = ppval(spline_natural, x_eval);
     f_spline_not_a_knot = fnval(spline_not_a_knot, x_eval);
     
     % Calcolare l'errore massimo
@@ -41,10 +40,9 @@ loglog(h_values, error_natural, '-o', 'DisplayName', 'Spline Naturale');
 hold on;
 loglog(h_values, error_not_a_knot, '-x', 'DisplayName', 'Spline Not-a-Knot');
 hold off;
-xlabel('h');
+xlabel('h = 20/n');
 ylabel('Errore di approssimazione');
 title('Errore di approssimazione con spline interpolanti');
+
 legend('Location', 'Best');
 grid on;
-
-% Osservazione della decrescita dell'errore
