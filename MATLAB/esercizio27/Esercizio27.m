@@ -21,12 +21,12 @@ p = a;
 % Valuta il polinomio sui punti di xi
 yi_fit = polyval(p, xi);
 
-% Grafica dei risultati
+% Grafico dei risultati
 figure;
 plot(xi, yi, 'o', 'DisplayName', 'Dati originali'); % Dati originali
 hold on;
 plot(xi, yi_fit, '-', 'DisplayName', 'Polinomio di grado 3'); % Polinomio approssimante
-legend show;
+legend('Location', 'Best');
 xlabel('xi');
 ylabel('yi');
 title('Approssimazione ai minimi quadrati con polinomio di grado 3');
