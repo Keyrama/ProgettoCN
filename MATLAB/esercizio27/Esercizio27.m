@@ -1,22 +1,32 @@
 % Imposta il seed per la generazione casuale dei numeri
-rng(0)
+rng(0);
 
 % Genera i dati
 xi = linspace(0, 2*pi, 101);
 yi = sin(xi) + rand(size(xi)) * 0.05;
 
-% Calcola i coefficienti del polinomio di grado 3
-p = polyfit(xi, yi, 3);
+% Costruisci manualmente la matrice di Vandermonde per il polinomio di grado 3
+n = length(xi);
+V = zeros(n, 4);
+for i = 1:n
+    V(i, :) = [xi(i)^3, xi(i)^2, xi(i), 1];
+end
+
+% Risolvi il sistema lineare V * a = yi per ottenere i coefficienti
+a = V \ yi';
+
+% I coefficienti sono già nell'ordine giusto per l'uso con polyval
+p = a;
 
 % Valuta il polinomio sui punti di xi
 yi_fit = polyval(p, xi);
 
-% Grafico dei risultati
+% Grafica dei risultati
 figure;
-plot(xi, yi, 'o', 'DisplayName', 'Dati originali');
+plot(xi, yi, 'o', 'DisplayName', 'Dati originali'); % Dati originali
 hold on;
-plot(xi, yi_fit, '-', 'DisplayName', 'Polinomio di grado 3'); 
-legend('Location', 'Best');
+plot(xi, yi_fit, '-', 'DisplayName', 'Polinomio di grado 3'); % Polinomio approssimante
+legend show;
 xlabel('xi');
 ylabel('yi');
 title('Approssimazione ai minimi quadrati con polinomio di grado 3');
