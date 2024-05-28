@@ -21,9 +21,7 @@ hold on
 semilogy((2:2:100), normNewton, 'DisplayName', 'Newton');
 hold off
 
-xlabel('Grado polinomio');
+xlabel('h = 10/n');
 ylabel('Errore di interpolazione');
-title({'Errore di interpolazione della funzione di Runge', ...
-    'attraverso polinomi interpolanti di Lagrange e Newton'}, 'Interpreter', 'latex');
-
+title('Errore di inter');
 legend('Location', 'Best');
